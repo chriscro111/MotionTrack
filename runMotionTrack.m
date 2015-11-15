@@ -6,9 +6,12 @@ frames = read(v,[1,Inf]);
 
 %% Testing processing frames into binary images
 %im = imread('testMedia/yelloBallTest.jpg');
+% manually select threshold
+labIm = rgb2lab(frames(:,:,:,1));
+thresh = threshTool(labIm(:,:,3));
 for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
-    bin(:,:,i) = labIm(:,:,3) >= 30 & labIm(:,:,3) <= 70;
+    bin(:,:,i) = labIm(:,:,3) >= thresh;
     se = strel('disk',2);  
     bin(:,:,i) = imerode(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);

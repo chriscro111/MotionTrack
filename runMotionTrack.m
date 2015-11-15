@@ -67,19 +67,19 @@ for i=1:size(labels,4)
     avgX = blob1X / blob1Count;
     avgY = blob1Y / blob1Count;
     centers(i,1,1) = avgX;
-    centers(i,2,1) = avgX;
+    centers(i,2,1) = avgY;
    end
    if blob2Count > 0
     avgX = blob2X / blob2Count;
     avgY = blob2Y / blob2Count;
-    centers(i,1,2) = [avgX avgY];
-    centers(i,2,2) = [avgX avgY];
+    centers(i,1,2) = avgX;
+    centers(i,2,2) = avgY;
    end
    if blob3Count > 0
     avgX = blob3X / blob3Count;
     avgY = blob3Y / blob3Count;
-    centers(i,1,3) = [avgX avgY];
-    centers(i,2,3) = [avgX avgY];
+    centers(i,1,3) = avgX;
+    centers(i,2,3) = avgY;
    end
 end
 
@@ -88,6 +88,6 @@ for i = 1:25
    subplot(5,5,i);
    imshow(bin(:,:,i));
    hold on;
-   plot(centers(i,1,1),centers(i,2,1),'r.','MarkerSize',10);
+   plot(round(centers(i,1,1)),round(centers(i,2,1)),'r.','MarkerSize',10);
 end
 %% some kind of plot/animation showing position over time for each ball??

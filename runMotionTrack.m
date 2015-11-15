@@ -12,7 +12,7 @@ thresh = threshTool(labIm(:,:,3));
 for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
     bin(:,:,i) = labIm(:,:,3) >= thresh;
-    se = strel('disk',2);  
+    se = strel('disk',2);   % size needs to proportional to resolutipon
     bin(:,:,i) = imerode(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);

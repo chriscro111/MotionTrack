@@ -9,6 +9,10 @@ frames = read(v,[1,Inf]);
 for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
     bin(:,:,i) = labIm(:,:,3) >= 30 & labIm(:,:,3) <= 70;
+    se = strel('disk',11);  
+    bin(:,:,i) = imerode(bin(:,:,i),se);
+    bin(:,:,i) = imdilate(bin(:,:,i),se);
+    bin(:,:,i) = imdilate(bin(:,:,i),se);
 end
 
 %% Display some binary frames

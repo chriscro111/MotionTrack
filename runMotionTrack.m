@@ -70,20 +70,68 @@ for i=1:size(labels,4)
    if blob1Count > 0
     avgX = blob1X / blob1Count;
     avgY = blob1Y / blob1Count;
-    centers(i,1,1) = avgX;
-    centers(i,2,1) = avgY;
+    if i > 1
+        dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
+        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if dist1 < dist2 && dist1 < dist3
+            centers(i,1,1) = avgX;
+            centers(i,2,1) = avgY;
+        elseif dist2 < dist3 
+            centers(i,1,2) = avgX;
+            centers(i,2,2) = avgY;
+        else
+            centers(i,1,3) = avgX;
+            centers(i,2,3) = avgY;
+        end
+    else
+       centers(i,1,1) = avgX;
+       centers(i,2,1) = avgY; 
+    end
    end
    if blob2Count > 0
     avgX = blob2X / blob2Count;
     avgY = blob2Y / blob2Count;
-    centers(i,1,2) = avgX;
-    centers(i,2,2) = avgY;
+    if i > 1
+        dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
+        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if dist1 < dist2 && dist1 < dist3
+            centers(i,1,1) = avgX;
+            centers(i,2,1) = avgY;
+        elseif dist2 < dist3 
+            centers(i,1,2) = avgX;
+            centers(i,2,2) = avgY;
+        else
+            centers(i,1,3) = avgX;
+            centers(i,2,3) = avgY;
+        end
+    else
+       centers(i,1,2) = avgX;
+       centers(i,2,2) = avgY; 
+    end
    end
    if blob3Count > 0
     avgX = blob3X / blob3Count;
     avgY = blob3Y / blob3Count;
-    centers(i,1,3) = avgX;
-    centers(i,2,3) = avgY;
+    if i > 1
+        dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
+        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if dist1 < dist2 && dist1 < dist3
+            centers(i,1,1) = avgX;
+            centers(i,2,1) = avgY;
+        elseif dist2 < dist3 
+            centers(i,1,2) = avgX;
+            centers(i,2,2) = avgY;
+        else
+            centers(i,1,3) = avgX;
+            centers(i,2,3) = avgY;
+        end
+    else
+       centers(i,1,3) = avgX;
+       centers(i,2,3) = avgY; 
+    end
    end
 end
 

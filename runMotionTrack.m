@@ -1,5 +1,5 @@
 % load video file and separate into frames
-path = 'testMedia/lowres_2balls.mp4';
+path = 'testMedia/lowres_test.mp4';
 % path = 'testMedia/lowres_test.mp4';
 v = VideoReader(path);
 frames = read(v,[1,Inf]);
@@ -87,26 +87,26 @@ for i=1:size(labels,4)
    end
 end
 
-%% display center
-figure(2);
-for i = 1:25
-   subplot(5,5,i);
-   imshow(bin(:,:,i));
-   hold on;
-   plot(round(centers(i,1,1)),round(centers(i,2,1)),'r.','MarkerSize',10);
-   plot(round(centers(i,1,2)),round(centers(i,2,2)),'b.','MarkerSize',10);
-end
+% %% display center
+% figure(2);
+% for i = 1:25
+%    subplot(5,5,i);
+%    imshow(bin(:,:,i));
+%    hold on;
+%    plot(round(centers(i,1,1)),round(centers(i,2,1)),'r.','MarkerSize',10);
+%    plot(round(centers(i,1,2)),round(centers(i,2,2)),'b.','MarkerSize',10);
+% end
 
-%% some kind of plot/animation showing position over time for each ball??
+%% Plot positions on frames
 figure(3);
 clf;
-markers = ['r.' 'b.' 'g.'];
+markers = ['r' 'b' 'g'];
 for i = 1:numFrames
+    imshow(frames(:,:,:,i));
+    hold on;
     for b = 1:numBlobs(i)
-        imshow(frames(:,:,:,i));
-        hold on;
-        plot(round(centers(i,1,b)),round(centers(i,2,b)),markers(b*2-1:b*2),'MarkerSize',20);
-        hold on;
+        plot(centers(i,1,b),centers(i,2,b),[markers(b) '.'],'MarkerSize',20);
     end
     drawnow;
+    hold off;
 end

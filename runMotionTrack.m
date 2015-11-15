@@ -36,7 +36,11 @@ for i = 1:numFrames
 end
 
 %% calculate the centers of each group of pixels
-centers = zeros(numFrames, 2, max(numBlobs));
+numBlobs = mode(numBlobs);
+centers = zeros(numFrames, 2, numBlobs);
+dist1 = Inf;
+dist2 = Inf;
+dist3 = Inf;
 for i=1:size(labels,4)
    blob1X = 0;
    blob1Y = 0;
@@ -72,8 +76,12 @@ for i=1:size(labels,4)
     avgY = blob1Y / blob1Count;
     if i > 1
         dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
-        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
-        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if(numBlobs > 1)
+            dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        end
+        if(numBlobs > 2)
+            dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        end
         if dist1 < dist2 && dist1 < dist3
             centers(i,1,1) = avgX;
             centers(i,2,1) = avgY;
@@ -94,8 +102,12 @@ for i=1:size(labels,4)
     avgY = blob2Y / blob2Count;
     if i > 1
         dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
-        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
-        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if(numBlobs > 1)
+            dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        end
+        if(numBlobs > 2)
+            dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        end
         if dist1 < dist2 && dist1 < dist3
             centers(i,1,1) = avgX;
             centers(i,2,1) = avgY;
@@ -116,8 +128,12 @@ for i=1:size(labels,4)
     avgY = blob3Y / blob3Count;
     if i > 1
         dist1 = abs(sqrt((avgX^2-centers(i-1,1,1)^2)+(avgY^2-centers(i-1,2,1)^2)));
-        dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
-        dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        if(numBlobs > 1)
+            dist2 = abs(sqrt((avgX^2-centers(i-1,1,2)^2)+(avgY^2-centers(i-1,2,2)^2)));
+        end
+        if(numBlobs > 2)
+            dist3 = abs(sqrt((avgX^2-centers(i-1,1,3)^2)+(avgY^2-centers(i-1,2,3)^2)));
+        end
         if dist1 < dist2 && dist1 < dist3
             centers(i,1,1) = avgX;
             centers(i,2,1) = avgY;
@@ -152,7 +168,7 @@ markers = ['r' 'b' 'g'];
 for i = 1:numFrames
     imshow(frames(:,:,:,i));
     hold on;
-    for b = 1:numBlobs(i)
+    for b = 1:numBlobs
         plot(centers(i,1,b),centers(i,2,b),[markers(b) '.'],'MarkerSize',20);
     end
     drawnow;

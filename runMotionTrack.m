@@ -1,5 +1,5 @@
 % load video file and separate into frames
-path = 'testMedia/lowres_test.mp4';
+path = 'testMedia/lowres_2balls.mp4';
 % path = 'testMedia/lowres_test.mp4';
 v = VideoReader(path);
 frames = read(v,[1,Inf]);
@@ -20,12 +20,12 @@ for i=1:numFrames
 end
 
 %% Display some binary frames
-figure(1);
-clf;
-for i = 1:25
-   subplot(5,5,i);
-   imshow(bin(:,:,i));
-end
+% figure(1);
+% clf;
+% for i = 1:25
+%    subplot(5,5,i);
+%    imshow(bin(:,:,i));
+% end
 
 %% segment image with labels for each group of pixels corresponding to a
 % ball
@@ -36,7 +36,7 @@ for i = 1:numFrames
 end
 
 %% calculate the centers of each group of pixels
-
+centers = zeros(numFrames, 2, max(numBlobs));
 for i=1:size(labels,4)
    blob1X = 0;
    blob1Y = 0;

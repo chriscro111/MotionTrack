@@ -2,10 +2,11 @@
 path = 'testMedia/VID_20151115_100007984.mp4';
 v = VideoReader(path);
 frames = read(v,[1,Inf]);
-% process each frame into a binary image with the balls in the foreground
+[rows, cols, ~, numFrames] = size(frames);
 %% Testing processing frames into binary images
 %im = imread('testMedia/yelloBallTest.jpg');
-for i=1:size(frames,4)
+bin = repmat(uint8(0), rows, cols, numFrames);
+for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
     bin(:,:,i) = labIm(:,:,3) >= 30 & labIm(:,:,3) <= 70;
 end

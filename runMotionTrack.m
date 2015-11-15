@@ -9,15 +9,17 @@ frames = read(v,[1,Inf]);
 for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
     bin(:,:,i) = labIm(:,:,3) >= 30 & labIm(:,:,3) <= 70;
-    se = strel('disk',11);  
+    se = strel('disk',2);  
     bin(:,:,i) = imerode(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);
 end
 
 %% Display some binary frames
-for i = 25:50
-   subplot(5,5,i-24);
+figure(1);
+clf;
+for i = 1:25
+   subplot(5,5,i);
    imshow(bin(:,:,i));
 end
 

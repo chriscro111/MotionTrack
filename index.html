@@ -48,12 +48,14 @@
 <h1>
 <a id="teaser-figure" class="anchor" href="#teaser-figure" aria-hidden="true"><span class="octicon octicon-link"></span></a>Teaser Figure</h1>
 <img src ="images/teaser.png">
-<p>A figure that conveys the main idea behind the project or the main application being addressed.</p>
+<p>Balls used as markers shown with the centers identified</p>
 
 <h1>
 <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>Introduction</h1>
 
-<p>Motivation behind the problem you are solving, what applications it has, any brief background on the particular domain you are working in (if not regular RBG photographs), etc. If you are using a new way to solve an existing problem, briefly mention and describe the existing approaches and tell us how your approach is new. </p>
+<p>Something seen in many sci-fi films is the use of computers through gesture control. The first step to be able to move towards this feature is the ability to track the object being used to make the gesture. For our project we solve a simplified problem and track the centers of yellow balls through a video. In order to do this we do some computations on each individual frame of the video which we get by splitting the video into frames within MATLAB. We also use the the LAB colorspace instead of the RGB colorspace since the balls we use are significantly brighter that the rest of the content in each frame. This is highly dependent on the lighting of the setting the moition tracking is occuring in so our system does assume that the lighting will remain the same throughout the video and does require to some initial user input in order to get the appropriate bounds so only the balls will be identified their brightness.  
+
+Motivation behind the problem you are solving, what applications it has, any brief background on the particular domain you are working in (if not regular RBG photographs), etc. If you are using a new way to solve an existing problem, briefly mention and describe the existing approaches and tell us how your approach is new. </p>
 
 <h1>
 <a id="approach" class="anchor" href="#approach" aria-hidden="true"><span class="octicon octicon-link"></span></a>Approach</h1>

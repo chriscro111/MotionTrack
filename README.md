@@ -28,7 +28,21 @@ Once we had each blob labeled, we calculated the center of each. To do this, we 
 Once we had the list of centers we then produced an animated plot that displayed each frame with the center marked on each ball.
 
 # Experiments and results
-Provide details about the experimental set up (number of images/videos, number of datasets you experimented with, train/test split if you used machine learning algorithms, etc.). Describe the evaluation metrics you used to evaluate how well your approach is working. Include clear figures and tables, as well as illustrative qualitative examples if appropriate. Be sure to include obvious baselines to see if your approach is doing better than a naive approach (e.g. for classification accuracy, how well would a classifier do that made random decisions?). Also discuss any parameters of your algorithms, and tell us how you set the values of those parameters. You can also show us how the performance varies as you change those parameter values. Be sure to discuss any trends you see in your results, and explain why these trends make sense. Are the results as expected? Why?
+The first experiment we conducted was determining the best method to isolate the markers from the rest of the image. To do this we used a single image with one of the markers and tried converting it to a LAB image then to a binary image based on a threshold that would give us a blob with only the marker and we were able to get these results with the single image when selecting an appropriate threshold:
+![Initial test of separating marker from a single image](images/labExp.png)
+
+This seemed fine, but when applying this method to the frames of a video there was some noise as shown in the binary images of some of the frames of a test video here:
+![Initial results separating marker from video frames](images/noiseExp.png)
+
+After seeing the noise in these images we realized we would need to erode and then dilate the binary images in order to make the blobs more uniform and to remove noise from the images. After applying the MATLAB `imerode` once and `imdilate` twice we ended up with the following results which were much better than our initial binary images:
+![Separating marker from video frames after eroding and dilating the images](images/finalBlobExp.png)
+
+
 
 # Qualitative results
 Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.
+
+![Binary images with centers](images/bincenters.PNG)
+
+Embed youtube video here
+

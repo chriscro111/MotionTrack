@@ -37,6 +37,8 @@ This seemed fine, but when applying this method to the frames of a video there w
 After seeing the noise in these images we realized we would need to erode and then dilate the binary images in order to make the blobs more uniform and to remove noise from the images. After applying the MATLAB `imerode` once and `imdilate` twice we ended up with the following results which were much better than our initial binary images:
 ![Separating marker from video frames after eroding and dilating the images](images/finalBlobExp.png)
 
+[2 ball speed test](https://www.youtube.com/watch?v=Je3SOkoRHHk)
+
 
 
 # Qualitative results
@@ -44,5 +46,5 @@ Show several visual examples of inputs/outputs of your system (success cases and
 
 ![Binary images with centers](images/bincenters.PNG)
 
-Embed youtube video here
+[Output of the system](https://www.youtube.com/watch?v=M6axUGNRiI8)
 

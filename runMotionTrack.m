@@ -1,5 +1,5 @@
 % load video file and separate into frames
-path = 'testMedia/lowres_3balls.mp4';
+path = 'testMedia/lowres_2balls.mp4';
 % path = 'testMedia/lowres_test.mp4';
 v = VideoReader(path);
 frames = read(v,[1,Inf]);

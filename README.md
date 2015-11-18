@@ -37,7 +37,7 @@ This seemed fine, but when applying this method to the frames of a video there w
 After seeing the noise in these images we realized we would need to erode and then dilate the binary images in order to make the blobs more uniform and to remove noise from the images. After applying the MATLAB `imerode` once and `imdilate` twice we ended up with the following results which were much better than our initial binary images:
 ![Separating marker from video frames after eroding and dilating the images](images/finalBlobExp.png)
 
-The second experiment we performed was on how the speed at which the markers were moved affected the performance of the system. The system did not have any trouble handling the markers moving at slower speeds, but when the speed of the markers was increased the system began switching which center went with which marker. We believe this was because the frame rate was low enough that when the first marker moved out of a position the second marker moved enough to be in that position so it looked to the system like the first marker had not moved at all. This can be seen happening at 0:08 in the video linked below and we would recommend using the feature Youtube has to view it at a slower speed as to allow for better observation:__
+The second experiment we performed was on how the speed at which the markers were moved affected the performance of the system. The system did not have any trouble handling the markers moving at slower speeds, but when the speed of the markers was increased the system began switching which center went with which marker. We believe this was because the frame rate was low enough that when the first marker moved out of a position the second marker moved enough to be in that position so it looked to the system like the first marker had not moved at all. This can be seen happening at 0:08 in the video linked below and we would recommend using the feature Youtube has to view it at a slower speed as to allow for better observation:<br />
 [2 ball speed test](https://www.youtube.com/watch?v=Je3SOkoRHHk)
 
 
@@ -46,5 +46,5 @@ The second experiment we performed was on how the speed at which the markers wer
 
 ![Binary images with centers](images/bincenters.PNG)
 
-[Output of the system](https://www.youtube.com/watch?v=M6axUGNRiI8)__
+[Output of the system](https://www.youtube.com/watch?v=M6axUGNRiI8)<br />
 As seen in the video linked above we were able to successfully track markers in a video and keep track of their individual centers. The only failure cases that we came across were if there was a heavy lighting difference in part of the video, a shadow falls across it, or if the speed at which the markers are moved is greatly increased. If this project was to progress further it may be possible to implement some sort of checking for dramatic changes in the overall colorspace and allow the user to reset the threshold to a different point when that change occurs to keep changes in lighting from affecting the performance of the system. 

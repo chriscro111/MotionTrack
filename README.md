@@ -42,3 +42,7 @@ After seeing the noise in these images we realized we would need to erode and th
 # Qualitative results
 Show several visual examples of inputs/outputs of your system (success cases and failures) that help us better understand your approach.
 
+![Binary images with centers](images/bincenters.png)
+
+Embed youtube video here
+

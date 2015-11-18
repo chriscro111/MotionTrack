@@ -1,19 +1,21 @@
 % load video file and separate into frames
-path = 'testMedia/lowres_2balls.mp4';
+clear;
+path = 'testMedia/2ballspeedtest.mp4';
 % path = 'testMedia/lowres_test.mp4';
 v = VideoReader(path);
 frames = read(v,[1,Inf]);
+clear v;
 [rows, cols, ~, numFrames] = size(frames);
 
 %% Testing processing frames into binary images
 %im = imread('testMedia/yelloBallTest.jpg');
 % manually select threshold
-labIm = rgb2lab(frames(:,:,:,1));
+labIm = rgb2lab(frames(:,:,:,5));
 thresh = threshTool(labIm(:,:,3));
 for i=1:numFrames
     labIm = rgb2lab(frames(:,:,:,i));
     bin(:,:,i) = labIm(:,:,3) >= thresh;
-    se = strel('disk',2);   % size needs to proportional to resolutipon
+    se = strel('disk',4);   % size needs to proportional to resolutipon
     bin(:,:,i) = imerode(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);
     bin(:,:,i) = imdilate(bin(:,:,i),se);
@@ -66,6 +68,7 @@ for i = 2:numFrames
     % compute matching centers
     for b = 1:numBlobs
         [~, ind] = min(dist(b, :), [], 2);
+        dist(:, ind) = Inf;
         centers(i, 1, b) = coords(ind, 1);
         centers(i, 2, b) = coords(ind, 2);
     end
@@ -88,7 +91,7 @@ markers = ['r' 'b' 'g'];
 for i = 1:numFrames
     imshow(frames(:,:,:,i));
     hold on;
-    for b = 1:numBlobs
+    for b = 1:blobCount(i)
         plot(centers(i,1,b),centers(i,2,b),[markers(b) '.'],'MarkerSize',20);
     end
     drawnow;

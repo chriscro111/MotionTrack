@@ -28,7 +28,7 @@ Once we had each blob labeled, we calculated the center of each. To do this, we 
 Once we had the list of centers we then produced an animated plot that displayed each frame with the center marked on each ball.
 
 # Experiments and results
-The first experiment we conducted was determining the best method to isolate the markers from the rest of the image. To do this we used a single image with one of the markers and tried converting it to a LAB image then to a binary image based on a threshold that would give us a blob with only the marker and we were able to get these results with the single image when selecting an appropriate threshold:
+The first experiment we conducted was determining the best method to isolate the markers from the rest of the image. To do this we used a single image with one of the markers, and converted it to an LAB image. We then tried creating a binary image based on a threshold that would give us a blob with only the marker. We were able to get these results with the single image when selecting an appropriate threshold:
 ![Initial test of separating marker from a single image](images/labExp.png)
 
 This seemed fine, but when applying this method to the frames of a video there was some noise as shown in the binary images of some of the frames of a test video here:
@@ -37,10 +37,8 @@ This seemed fine, but when applying this method to the frames of a video there w
 After seeing the noise in these images we realized we would need to erode and then dilate the binary images in order to make the blobs more uniform and to remove noise from the images. After applying the MATLAB `imerode` once and `imdilate` twice we ended up with the following results which were much better than our initial binary images:
 ![Separating marker from video frames after eroding and dilating the images](images/finalBlobExp.png)
 
-The second experiment we performed was on how the speed at which the markers were moved affected the performance of the system. The system did not have any trouble handling the markers moving at slower speeds, but when the speed of the markers was increased the system began switching which center went with which marker. We believe this was because the frame rate was low enough that when the first marker moved out of a position the second marker moved enough to be in that position so it looked to the system like the first marker had not moved at all. This can be seen happening at 0:08 in the video linked below and we would recommend using the feature Youtube has to view it at a slower speed as to allow for better observation:<br />
+The second experiment we performed was on how the speed at which the markers were moved affected the performance of the system. The system did not have any trouble tracking the markers moving at slower speeds, but when the speed of the markers was increased the system began switching which center went with which marker. This was because the frame rate was low enough that when the first marker moved out of its position, the second marker moved close enough to that position so it looked to the system like the first marker had not moved at all. This can be seen happening at 0:08 in the video linked below. We would recommend using the half or quarter speed playback option of youtube to make it easier to see the centers swapping:  
 [2 ball speed test](https://www.youtube.com/watch?v=Je3SOkoRHHk)
-
-
 
 # Qualitative results
 
